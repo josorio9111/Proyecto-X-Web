@@ -3,6 +3,7 @@ import type { UsuarioCategoria } from './ResponseCategoria';
 export interface ResponseProductos {
     total?: number,
     productos?: Array<Producto>
+    message?: string
 }
 
 export interface Producto {

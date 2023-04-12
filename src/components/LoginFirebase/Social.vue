@@ -1,21 +1,21 @@
 <template>
-    <v-btn size="small" class="v-btn--icon" color="red" @click="loginGoogle">
+    <v-btn size="small" class="v-btn--icon" variant="outlined" @click="loginGoogle">
         <v-icon icon="mdi-google"></v-icon>
         <v-tooltip activator="parent" location="top">Google</v-tooltip>
     </v-btn>
-    <v-btn size="small" class="v-btn--icon" color="blue-darken-3" @click="loginFacebook" disabled>
+    <v-btn size="small" class="v-btn--icon" variant="outlined" @click="loginFacebook" disabled>
         <v-icon icon="mdi-facebook"></v-icon>
         <v-tooltip activator="parent" location="top">Facebook</v-tooltip>
     </v-btn>
-    <v-btn size="small" class="v-btn--icon" color="blue" @click="loginTwitter">
+    <v-btn size="small" class="v-btn--icon" variant="outlined" @click="loginTwitter">
         <v-icon icon="mdi-twitter"></v-icon>
         <v-tooltip activator="parent" location="top">Twitter</v-tooltip>
     </v-btn>
-    <v-btn size="small" class="v-btn--icon" color="black" @click="loginGithub">
+    <v-btn size="small" class="v-btn--icon" variant="outlined" @click="loginGithub">
         <v-icon icon="mdi-github"></v-icon>
         <v-tooltip activator="parent" location="top">Github</v-tooltip>
     </v-btn>
-    <v-btn class="v-btn--icon" color="grey-lighten-3" @click="openDialog = true" size="small">
+    <v-btn size="small" class="v-btn--icon" variant="outlined" @click="openDialog = true">
         <v-icon icon="mdi-phone"></v-icon>
         <v-tooltip activator="parent" location="top">Cellphone</v-tooltip>
     </v-btn>
@@ -76,5 +76,3 @@ const logginSocial = async (
     loading.value = false;
 };
 </script>
-
-<style scope></style>

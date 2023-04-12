@@ -1,6 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import DetailView from "../views/DetailView.vue"
 import { getCurrentUser } from 'vuefire';
 
 const router = createRouter({
@@ -14,14 +12,14 @@ const router = createRouter({
     {
       path: '/home',
       name: 'home',
-      component: HomeView,
+      component: () => import('../views/HomeView.vue'),
       meta: { requiresAuth: false }
 
     },
     {
       path: '/detail',
       name: 'detail',
-      component: DetailView,
+      component: () => import("../views/DetailView.vue"),
       meta: { requiresAuth: true }
 
     }

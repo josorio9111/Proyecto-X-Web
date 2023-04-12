@@ -1,6 +1,7 @@
 export interface ResponseCategoria {
     total?: number,
     categorias?: Array<Categoria>
+    message?: string
 }
 
 export interface Categoria {

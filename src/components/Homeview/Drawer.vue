@@ -6,32 +6,32 @@
       </v-list-item>
     </v-list>
     <v-divider></v-divider>
-    <v-list>
-      <v-list-item variant="plain" v-for="item in categorias" :key="item.id" @click="_onClickItem(item.id)"
-        prepend-icon="mdi-view-dashboard">
-        <v-list-item-title class="text-capitalize text-body-1"> {{ item.nombre.toLowerCase() }} </v-list-item-title>
-        <v-list-item-subtitle class="text-capitalize text-body-3"> Categoria </v-list-item-subtitle>
-      </v-list-item>
-    </v-list>
+    <template v-if="categorias.length > 0">
+      <v-list>
+        <v-list-item variant="plain" v-for="item in categorias" :key="item.id" @click="_onClickItem(item.id)"
+          prepend-icon="mdi-view-dashboard">
+          <v-list-item-title class="text-capitalize text-body-1"> {{ item.nombre.toLowerCase() }} </v-list-item-title>
+          <v-list-item-subtitle class="text-capitalize text-body-3"> Categoria </v-list-item-subtitle>
+        </v-list-item>
+      </v-list>
+    </template>
   </v-navigation-drawer>
 </template>
 
 <script setup lang="ts">
 import { myStore } from "@/stores/store";
 import { storeToRefs } from "pinia";
-import { ref, onMounted, onBeforeMount } from 'vue';
-import CategoriaService from "../../services/CategoriaService";
+import { ref, onBeforeMount } from 'vue';
 import { getCurrentUser } from 'vuefire';
 import router from '@/router';
-
 
 const currentUser = ref({
   nombre: '',
   foto: '',
   email: ''
 })
-const { drawer, categorias } = storeToRefs(myStore());
-const cates = new CategoriaService();
+const { drawer, categorias, loading } = storeToRefs(myStore());
+const { initCategorias } = myStore()
 
 onBeforeMount(async () => {
   await getMyCategorias();
@@ -52,11 +52,9 @@ async function getMyCategorias() {
   if (!token) {
     return router.push({ name: '/' })
   }
-  await cates.initCategorias(token);
-  const response = cates.getCategorias();
-  if (response.total && response.total > 0 && response.categorias) {
-    categorias.value = response.categorias;
-  }
+  loading.value = true
+  await initCategorias(token)
+  loading.value = false
 }
 
 const _onClickItem = (id: string) => {
