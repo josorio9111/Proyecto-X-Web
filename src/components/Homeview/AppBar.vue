@@ -74,13 +74,14 @@ defineProps({
   title: String,
 });
 
-const { drawer, categorias, darkMode } = storeToRefs(myStore());
+const { drawer, categorias, darkMode, loading } = storeToRefs(myStore());
 const { toggleTheme } = myStore()
 const dialog = ref<boolean>(false)
 
 const logout = () => {
   signOut(auth)
     .then(() => {
+      loading.value = false
       localStorage.removeItem('token')
       router.push({ name: "login" });
     })
